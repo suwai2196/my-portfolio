@@ -9,7 +9,7 @@ export const site = {
   role: 'NLP Researcher',
   tagline: 'Quietly observant, quickly adaptive.',
   // Short bio used on the home page hero. Edit freely.
-  bio: 'I thrive in the details and learn at pace. My work is driven by a deep curiosity for NLP and a commitment to precision — balancing productivity with presence.',
+  bio: 'I bring the intensity of the badminton court to my research. I love the thrill of solving complex problems and the strategic thinking that defines both my wins and my losses. I value precision, focus, and a deep respect for time — yours and mine.',
   email: 'suwai2196@gmail.com',
   // Used for SEO/meta. Keep in sync with `site` in astro.config.mjs.
   url: 'https://suwaimyo.com',

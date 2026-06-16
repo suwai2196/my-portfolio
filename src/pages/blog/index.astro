@@ -8,6 +8,17 @@ import PostCard from '../../components/PostCard.astro';
 const posts = (await getCollection('blog', ({ data }) => import.meta.env.DEV || !data.draft)).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
 );
+
+// Use the first sentence of each post as its list excerpt, stripping basic
+// Markdown so emphasis/link syntax doesn't leak into the plain-text summary.
+function firstSentence(body: string): string {
+  const text = body
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1') // links -> their text
+    .replace(/[*_`#>]/g, '') // drop emphasis/heading/quote markers
+    .trim();
+  const match = text.match(/[\s\S]*?[.!?](?=\s|$)/);
+  return (match ? match[0] : text.split('\n')[0]).trim();
+}
 ---
 
 <BaseLayout title="Blog" description="Notes and writing on NLP and tooling.">
@@ -20,7 +31,7 @@ const posts = (await getCollection('blog', ({ data }) => import.meta.env.DEV || 
       </p>
     ) : (
       <div data-reveal>
-        {posts.map((post) => <PostCard post={post} />)}
+        {posts.map((post) => <PostCard post={post} excerpt={firstSentence(post.body ?? '')} />)}
       </div>
     )
   }

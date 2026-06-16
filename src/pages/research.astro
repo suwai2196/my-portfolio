@@ -2,19 +2,26 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
 
-// TODO: Replace these with your real research themes.
 const themes = [
   {
     title: 'Language Modeling',
-    body: 'A short description of this research direction — the questions you ask and why they matter.',
+    body: `The primary challenge is adapting foundation models to the linguistic nuances of Burmese without relying on massive, language-specific corpora. This matters because it moves us past the dependency on English-centric data, making advanced language technology accessible even in resource-constrained environments.`,
   },
   {
     title: 'Evaluation & Benchmarking',
-    body: 'How you measure progress: datasets, metrics, and the pitfalls you care about.',
+    body: `Defining what "success" actually looks like in low-resource contexts is an ongoing effort. Standard metrics often mask poor practical performance; moving toward benchmarks that prioritize real-world reasoning and reliability is essential to ensuring that our progress is genuine rather than just an artifact of overfitting.`,
   },
   {
     title: 'Data-Centric NLP',
-    body: 'Work on data quality, curation, and how data shapes model behavior.',
+    body: `The focus here is on the relationship between intentional, human-curated data and model behavior. Since sheer volume is not always an option, understanding how strategic selection — rather than just scale — shapes performance is the most efficient path toward building reliable models.`,
+  },
+  {
+    title: 'Information Extraction',
+    body: `This direction explores how we can accurately parse complex, multi-layered information in Burmese. Developing specialized resources, such as nested NER corpora, offers a way to address the structural complexities of the language to improve the precision of information retrieval.`,
+  },
+  {
+    title: 'Foundational Resource Creation',
+    body: `Building a sustainable ecosystem for Burmese NLP requires creating core linguistic assets that are often missing. Without systematic, high-quality infrastructure, research remains fragmented; creating these assets provides a foundation for more consistent, large-scale experimentation.`,
   },
 ];
 ---
@@ -22,7 +29,7 @@ const themes = [
 <BaseLayout title="Research" description="Research interests and directions.">
   <PageHeader
     title="Research"
-    intro="My work centers on natural language processing — building systems that are rigorous, well-evaluated, and useful. A few directions I focus on:"
+    intro="I approach NLP with a clear objective: to make language technology effective for low-resource languages, specifically Burmese. I enjoy the challenge of overcoming the data scarcity and technical limitations that hold these languages back from performing at a high level. A few directions I focus on:"
   />
 
   <div class="space-y-8">
@@ -37,8 +44,8 @@ const themes = [
   </div>
 
   <p class="mt-12 text-muted" data-reveal>
-    See <a href="/publications" class="text-accent hover:underline">publications</a> for
-    specific papers, or <a href="/#contact" class="text-accent hover:underline">get in touch</a>
+    See <a href="/publications" class="font-medium text-accent underline underline-offset-2 hover:text-accent/80">publications</a> for
+    specific papers, or <a href="/#contact" class="font-medium text-accent underline underline-offset-2 hover:text-accent/80">get in touch</a>
     to collaborate.
   </p>
 </BaseLayout>

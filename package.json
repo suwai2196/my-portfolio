@@ -24,5 +24,9 @@
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.20"
+  },
+  "//overrides": "Pin Vite to 7.x: Astro 6's dev-toolbar plugin still uses the deprecated optimizeDeps.esbuildOptions, which warns on Vite 8 (Rolldown). Remove once Astro supports Vite 8.",
+  "overrides": {
+    "vite": "^7.3.2"
   }
 }
