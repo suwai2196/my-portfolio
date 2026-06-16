@@ -1,0 +1,18 @@
+title: "Ontology-Based Learning Assistant Chatbot: Enhancing Accurate and Explanatory Knowledge Provision in Myanmar's Primary Education"
+authors:
+  - 'Su Wai Myo'
+  - 'Chutiporn Anutariya'
+venue: 'Proceedings of the 21st International Conference on Computing and Information Technology (IC2IT 2025), Lecture Notes in Networks and Systems, vol. 1390, Springer, Cham'
+year: 2025
+type: 'conference'
+url: 'https://link.springer.com/chapter/10.1007/978-3-031-90295-6_11'
+doi: '10.1007/978-3-031-90295-6_11'
+selected: true
+abstract: >
+  An ontology-based learning assistant chatbot that answers primary-school
+  students' questions using a Subject Ontology (SO) — a structured knowledge
+  model built and verified by teachers. Unlike large language models, whose
+  answers stem from opaque pre-training and are hard to trust for young
+  learners, the system grounds responses in an explicit, explainable knowledge
+  source to ensure accurate and appropriate knowledge provision in Myanmar's
+  primary education.

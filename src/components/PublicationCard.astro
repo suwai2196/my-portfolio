@@ -1,0 +1,53 @@
+---
+import { site } from '../config';
+
+interface Props {
+  pub: {
+    title: string;
+    authors: string[];
+    venue: string;
+    year: number;
+    url?: string;
+    pdf?: string;
+    doi?: string;
+    code?: string;
+  };
+}
+const { pub } = Astro.props;
+
+// Bold the site owner's name within the author list.
+const authorline = pub.authors
+  .map((a) => (a === site.name ? `<strong class="text-ink">${a}</strong>` : a))
+  .join(', ');
+
+const links = [
+  pub.url && { label: 'Link', href: pub.url },
+  pub.pdf && { label: 'PDF', href: pub.pdf },
+  pub.code && { label: 'Code', href: pub.code },
+  pub.doi && { label: 'DOI', href: `https://doi.org/${pub.doi}` },
+].filter(Boolean) as { label: string; href: string }[];
+---
+
+<article class="border-l-2 border-line pl-4" data-reveal>
+  <h3 class="font-medium leading-snug">
+    {pub.url ? <a href={pub.url} class="hover:text-accent transition-colors">{pub.title}</a> : pub.title}
+  </h3>
+  <p class="mt-1 text-sm text-muted" set:html={authorline} />
+  <p class="mt-0.5 text-sm italic text-muted">{pub.venue}, {pub.year}</p>
+  {
+    links.length > 0 && (
+      <div class="mt-1.5 flex gap-3 text-xs">
+        {links.map((l) => (
+          <a
+            href={l.href}
+            class="text-accent hover:underline"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {l.label}
+          </a>
+        ))}
+      </div>
+    )
+  }
+</article>

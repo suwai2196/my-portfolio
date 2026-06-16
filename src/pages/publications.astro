@@ -1,0 +1,41 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import PublicationCard from '../components/PublicationCard.astro';
+
+const pubs = (await getCollection('publications')).sort((a, b) => b.data.year - a.data.year);
+
+// Group by year, descending.
+const byYear = new Map<number, typeof pubs>();
+for (const p of pubs) {
+  const list = byYear.get(p.data.year) ?? [];
+  list.push(p);
+  byYear.set(p.data.year, list);
+}
+const years = [...byYear.keys()].sort((a, b) => b - a);
+---
+
+<BaseLayout title="Publications" description="Papers, preprints, and writing.">
+  <PageHeader title="Publications" intro="Peer-reviewed papers, preprints, and reports." />
+
+  {
+    pubs.length === 0 ? (
+      <p class="text-muted" data-reveal>
+        No publications yet. Add a <code>.yaml</code> file under{' '}
+        <code>src/content/publications/</code> and it will appear here automatically.
+      </p>
+    ) : (
+      <div class="space-y-12">
+        {years.map((year) => (
+          <section data-reveal>
+            <h2 class="mb-5 text-sm font-medium uppercase tracking-wider text-muted">{year}</h2>
+            <div class="space-y-6">
+              {byYear.get(year)!.map((p) => <PublicationCard pub={p.data} />)}
+            </div>
+          </section>
+        ))}
+      </div>
+    )
+  }
+</BaseLayout>

@@ -1,0 +1,44 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+
+// TODO: Replace these with your real research themes.
+const themes = [
+  {
+    title: 'Language Modeling',
+    body: 'A short description of this research direction — the questions you ask and why they matter.',
+  },
+  {
+    title: 'Evaluation & Benchmarking',
+    body: 'How you measure progress: datasets, metrics, and the pitfalls you care about.',
+  },
+  {
+    title: 'Data-Centric NLP',
+    body: 'Work on data quality, curation, and how data shapes model behavior.',
+  },
+];
+---
+
+<BaseLayout title="Research" description="Research interests and directions.">
+  <PageHeader
+    title="Research"
+    intro="My work centers on natural language processing — building systems that are rigorous, well-evaluated, and useful. A few directions I focus on:"
+  />
+
+  <div class="space-y-8">
+    {
+      themes.map((t) => (
+        <section data-reveal>
+          <h2 class="text-lg font-medium">{t.title}</h2>
+          <p class="mt-2 leading-relaxed text-muted">{t.body}</p>
+        </section>
+      ))
+    }
+  </div>
+
+  <p class="mt-12 text-muted" data-reveal>
+    See <a href="/publications" class="text-accent hover:underline">publications</a> for
+    specific papers, or <a href="/#contact" class="text-accent hover:underline">get in touch</a>
+    to collaborate.
+  </p>
+</BaseLayout>

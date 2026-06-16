@@ -1,0 +1,83 @@
+---
+import { site, nav } from '../config';
+
+const path = Astro.url.pathname;
+const isActive = (href: string) =>
+  href === '/' ? path === '/' : path.startsWith(href);
+---
+
+<header class="sticky top-0 z-50 border-b border-line bg-paper/80 backdrop-blur">
+  <nav class="mx-auto flex max-w-3xl items-center justify-between px-5 py-4">
+    <a href="/" class="font-medium tracking-tight hover:text-accent transition-colors">
+      {site.name}
+    </a>
+
+    <!-- Desktop nav -->
+    <ul class="hidden items-center gap-5 text-sm sm:flex">
+      {
+        nav.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              class:list={[
+                'transition-colors hover:text-accent',
+                isActive(item.href) ? 'text-accent font-medium' : 'text-muted',
+              ]}
+              aria-current={isActive(item.href) ? 'page' : undefined}
+            >
+              {item.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <!-- Mobile toggle -->
+    <button
+      id="nav-toggle"
+      class="text-muted hover:text-accent sm:hidden"
+      aria-label="Toggle menu"
+      aria-expanded="false"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+    </button>
+  </nav>
+
+  <!-- Mobile menu -->
+  <ul id="nav-menu" class="hidden border-t border-line px-5 py-3 text-sm sm:hidden">
+    {
+      nav.map((item) => (
+        <li class="py-1.5">
+          <a
+            href={item.href}
+            class:list={[
+              'transition-colors hover:text-accent',
+              isActive(item.href) ? 'text-accent font-medium' : 'text-muted',
+            ]}
+          >
+            {item.label}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</header>
+
+<script>
+  // Re-bind on every View Transition navigation, not just first load.
+  function bindNav() {
+    const toggle = document.getElementById('nav-toggle');
+    const menu = document.getElementById('nav-menu');
+    if (!toggle || !menu) return;
+    toggle.addEventListener('click', () => {
+      const open = menu.classList.toggle('hidden');
+      toggle.setAttribute('aria-expanded', String(!open));
+    });
+  }
+  bindNav();
+  document.addEventListener('astro:after-swap', bindNav);
+</script>
